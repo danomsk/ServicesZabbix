@@ -22,6 +22,7 @@ namespace ServicesZabbix
             string userId = ConfigurationManager.AppSettings["User_ID"];
             string password = ConfigurationManager.AppSettings["Password"];
             string path = ConfigurationManager.AppSettings["PathToScript"];
+            int timeUpdate = int.Parse(ConfigurationManager.AppSettings["TimeUpdate"]);
 
             //Проверка на сущестоввание директории
             if (!Directory.Exists($"{path}"))
@@ -92,7 +93,7 @@ namespace ServicesZabbix
                         File.AppendAllText($@"{path}\log.txt", $"{checktime} \t{channel_id} \t{name} \t{unit_id} \t{unitLocatoins} \t{diff.TotalMinutes}\n");
 
                     }
-                    await Task.Delay(5000);
+                    await Task.Delay(timeUpdate);
                 }
             }
         }
